@@ -1,9 +1,13 @@
 package com.ecom.product_api.entity;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +30,6 @@ public class Product {
     private double unitPrice;
     @Column(name="qty", nullable=false)
     private int qty;
-    @Embedded
-    private FileResource fileResource;
+    @OneToMany(mappedBy="product", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<Images> images;
 }

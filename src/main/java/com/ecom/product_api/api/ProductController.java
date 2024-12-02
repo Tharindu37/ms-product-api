@@ -1,5 +1,6 @@
 package com.ecom.product_api.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,8 +29,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/save")
-    public ResponseEntity<StandardResponse> createProduct(@RequestParam("data") String data,
-            @RequestParam("image") MultipartFile image) throws JsonProcessingException {
+    public ResponseEntity<StandardResponse> createProduct(@Valid @RequestParam("data") String data,
+           @Valid @RequestParam("image") MultipartFile image) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         RequestProductDto dto = objectMapper.readValue(data, RequestProductDto.class);
         productService.createProduct(dto, image);

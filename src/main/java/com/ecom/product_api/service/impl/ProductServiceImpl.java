@@ -1,6 +1,5 @@
 package com.ecom.product_api.service.impl;
 
-import java.awt.print.Pageable;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
@@ -125,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
         return ResponseProductPaginate.builder()
                 .count(productRepo.searchCount(searchText))
                 .dataList(
-                        productRepo.search(searchText, (Pageable) PageRequest.of(page, size)).stream().map(this::convert).toList()
+                        productRepo.search(searchText, PageRequest.of(page, size)).stream().map(this::convert).toList()
                 ).build();
     }
 
